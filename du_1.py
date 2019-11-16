@@ -14,6 +14,8 @@
 
 import math
 R = 6371.11
+rovnobezky = []
+poledniky = []
 
 # vyber zobrazeni uzivatelem
 
@@ -38,12 +40,13 @@ while True:
         break
 
 # uzivatel zada meritko a hned se z nej vypocita cislo, kterym se prevadi do [cm]
+# NEOSETRENY VSTUP
 
 x = (float((input("Zadej měřítko, ve kterém chceš výsledek, ve formě 1 : x, celočíselně, zadej pouze x, bez mezer: ")))/100000)
 
 # pocitadlo rovnobezek pro LAMBERT
 
-rovnobezky = [] #seznam rovnobezek, uz se vzorcem
+rovnobezky = [] #seznam rovnobezek
 deg_r = -100
 
 for _ in range(19):     # tohle je vzorec x, ten stejnej
@@ -54,8 +57,8 @@ print(rovnobezky)
 print(deg_r)
 
 # pocitadlo poledniku - vsechny zobrazeni STEJNY
-
-poledniky = []
+"""
+poledniky = [] #seznam polednkiku
 deg_p = -190
 
 for i in range(37):     # tohle je vzorec y, ten, co se meni
@@ -64,5 +67,5 @@ for i in range(37):     # tohle je vzorec y, ten, co se meni
     poledniky.append(polednik)
 print(poledniky)
 print(deg_p)
-
+"""
 
