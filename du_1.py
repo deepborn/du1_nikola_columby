@@ -4,68 +4,106 @@
 # ulozit si to do seznamu s urcitym poradim, bod 0,0 nejak dat doprostred?
 # meritko si vybere, to se jen ulozi do promenny a pak se tim proste vydeli ten vysledek
 
-# rovnobezky i poledniky po 10deg --> for cyklus
-# ale chci to mit rovnobezky -90 az 90 a poledniky -180 az 180 pres bod [0,0] a to musi bejt stred papiru
-
-# print(R*math.radians(u)) # = x
-# print(R*math.sin(math.radians(u))) # = y, pro lambertovo zobrazeni
-# x je poloha na rovniku a urcuje, kde mam kolmo na to nakreslit POLEDNIK
-# y je poloha na nultym poledniku a urcuje, kde mam kolmo na to nakreslit ROVNOBEZKU (tech je min a ty se meni)jf
-
 import math
 R = 6371.11
-rovnobezky = []
-poledniky = []
+
+# DEFINUJU FUNKCE, ALE AZ POTOM URCUJU MERITKO?????
+
+
+# definovani funkci pro vypocet zobrazeni
+def vzorec_lambertovo():
+    rovnobezky_L=[]
+    deg_r = -100
+    for _ in range(19):
+        deg_r = (deg_r + 10)
+        rovnobezka = round(((R*(math.sin(math.radians(deg_r))))/x), ndigits=1)
+        if abs(rovnobezka) > 100:
+            rovnobezka = "-"
+        rovnobezky_L.append(rovnobezka)
+    print("Rovnoběžky: ", rovnobezky_L)
+
+def vzorec_marinovo():
+    rovnobezky_A = []
+    deg_r = -100
+    for _ in range(19):
+        deg_r = (deg_r + 10)
+        rovnobezka = round(((R*(math.radians(deg_r)))/x), ndigits=1)
+        if abs(rovnobezka) > 100:
+            rovnobezka = "-"
+        rovnobezky_A.append(rovnobezka)
+    print("Rovnoběžky: ", rovnobezky_A)
+
+def vzorec_braunovo():
+    rovnobezky_B = []
+    deg_r = -100
+    for _ in range(19):
+        deg_r = (deg_r + 10)
+        rovnobezka = round(((2*R*(math.tan(math.radians(deg_r/2))))/x), ndigits=1)
+        if abs(rovnobezka) > 100:
+            rovnobezka = "-"
+        rovnobezky_B.append(rovnobezka)
+    print("Rovnoběžky: ", rovnobezky_B)
 
 # vyber zobrazeni uzivatelem
 
-zobrazeni = str(input("Vyber si zobrazení! Pro Lambertovo napiš L, pro Marinovo napiš A,\
- pro Braunovo napiš B, pro Mercatorovo napiš M :" )).upper()
+zobrazeni_input = input("Nejdřív si vyber zobrazení! Pro Lambertovo napiš L, pro Marinovo napiš A,\
+ pro Braunovo napiš B, pro Mercatorovo napiš M :" )
+zobrazeni = str(zobrazeni_input.upper())
 
 while True:
     if zobrazeni == "L":
-        print("LAMBERT")
+        print("Vybral sis Lambertovo válcové tečné zobrazení")
+
+        def vzorec_pouzivany():
+            vzorec_lambertovo()
         break
+
     if zobrazeni == "A":
-        print("MARIN")
+        print("Vybral sis Marinovo válcové tečné zobrazení")
+
+        def vzorec_pouzivany():
+            vzorec_marinovo()
         break
     if zobrazeni == "B":
-        print("BRAUN")
+        print("Vybral sis Braunovo válcové tečné zobrazení")
+
+        def vzorec_pouzivany():
+            vzorec_braunovo()
         break
-    if zobrazeni == "M":
-        print("MERCATOR")
-        break
+    #if zobrazeni == "M": # mercatorovo zobrazeni
+     #   print("Vybral sis Mercatorovo válcové tečné zobrazení")
+      #  break
     else:
-        print("SPATNE JSI TO ZADAL")
-        break
+        print("Zadal jsi neplatný input, nelze vybrat zadání :(")
+        exit()
 
-# uzivatel zada meritko a hned se z nej vypocita cislo, kterym se prevadi do [cm]
-# NEOSETRENY VSTUP
 
-x = (float((input("Zadej měřítko, ve kterém chceš výsledek, ve formě 1 : x, celočíselně, zadej pouze x, bez mezer: ")))/100000)
+# uzivatel zada meritko a z se nej vypocita cislo, kterym se vysledek vzorecku prevadi do cm
 
-# pocitadlo rovnobezek pro LAMBERT
+meritko = input("Zadej měřítko ve formě 1 : x. Napiš pouze x, celočíselně a bez mezer mezi nulami: ")
+try:
+    val = int(meritko)
+    print("Zadal jsi správně měřítko, zvolené měřítko je 1 :", meritko)
+except ValueError:
+    print("Zadal jsi špatně měřítko, zkus to znovu! Napsal jsi: ", meritko)
 
-rovnobezky = [] #seznam rovnobezek
-deg_r = -100
-
-for _ in range(19):     # tohle je vzorec x, ten stejnej
-    deg_r = (deg_r + 10)
-    rovnobezka = round(((R*(math.sin(math.radians(deg_r))))/x), ndigits=1)
-    rovnobezky.append(rovnobezka)
-print(rovnobezky)
-print(deg_r)
+x = int(meritko) / 100000 # udela z meritko cislo, ktere se pouzije ve vzorci
 
 # pocitadlo poledniku - vsechny zobrazeni STEJNY
-"""
+
 poledniky = [] #seznam polednkiku
 deg_p = -190
 
-for i in range(37):     # tohle je vzorec y, ten, co se meni
+for i in range(37):
     deg_p = (deg_p + 10)
     polednik = round(((R*(math.radians(deg_p))/x)), ndigits=1)
+    if abs(polednik) > 100:
+        polednik = "-"
     poledniky.append(polednik)
-print(poledniky)
-print(deg_p)
-"""
+
+
+vzorec_pouzivany()
+print("Poledníky: ", poledniky)
+
+
 

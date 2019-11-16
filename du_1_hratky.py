@@ -15,6 +15,10 @@
 # tan(v radianech) vypocita tangens
 # log(x, ...) kdyz necham ... prazdny, bude zakladni
 
+# print(R*math.radians(u)) # = x
+# print(R*math.sin(math.radians(u))) # = y, pro lambertovo zobrazeni
+# x je poloha na rovniku a urcuje, kde mam kolmo na to nakreslit POLEDNIK
+# y je poloha na nultym poledniku a urcuje, kde mam kolmo na to nakreslit ROVNOBEZKU (tech je min a ty se meni)
 
 import math
 R = 6371.11
@@ -79,10 +83,17 @@ while True:
         break
 """
 
+# print(float(input("PISVOLE: ")))
 
-x = (float((input("Zadej měřítko, ve kterém chceš výsledek, ve formě 1 : x, celočíselně, zadej pouze x, bez mezer: ")))/100000)
-rovnobezky = []   # mozna nemusi bejt na zacatku a proste to bude v kazdy fci, ale zas sou to radky navic... uvidime pak
+# x = (float((input("Zadej měřítko, ve kterém chceš výsledek, ve formě 1 : x, celočíselně, zadej pouze x, bez mezer: ")))/100000)
+meritko = input("Zadej měřítko, ve kterém chceš výsledek, ve formě 1 : x, celočíselně, zadej pouze x, bez mezer: ")
+try:
+    val = int(meritko)
+    print("Zadal jsi správně měřítko, zvolené měřítko je 1 :", meritko)
+except ValueError:
+    print("Zadal jsi špatně měřítko, zkus to znovu! Napsal jsi: ", meritko)
 
+x = int(meritko) / 100000
 
 # pocitadlo rovnobezek pro LAMBERT
 """
@@ -97,9 +108,10 @@ print(rovnobezky)
 print(rovnobezky_cm)
 print(rovnobezky_zaokr)
 """
-# prevest do vysledek do stringu a hezceji vypsat, poresit meractora
+
+"""
 def vzorec_lambertovo():
-    rovnobezky_L=[]           ###
+    rovnobezky_L=[]
     deg_r = -100
     for _ in range(19):
         deg_r = (deg_r + 10)
@@ -107,7 +119,7 @@ def vzorec_lambertovo():
         if abs(rovnobezka) > 100:
             rovnobezka = "-"
         rovnobezky_L.append(rovnobezka)
-    print("Rovnoběžky: ",rovnobezky_L)
+    print("Rovnoběžky: ", rovnobezky_L)
 
 vzorec_lambertovo()
 
@@ -121,7 +133,7 @@ def vzorec_marinovo():
         if abs(rovnobezka) > 100:
             rovnobezka = "-"
         rovnobezky_A.append(rovnobezka)
-    print("Rovnoběžky: ",rovnobezky_A)
+    print("Rovnoběžky: ", rovnobezky_A)
 
 vzorec_marinovo()
 
@@ -135,11 +147,12 @@ def vzorec_braunovo():
         if abs(rovnobezka) > 100:
             rovnobezka = "-"
         rovnobezky_B.append(rovnobezka)
-    print("Rovnoběžky: ",rovnobezky_B)
+    print("Rovnoběžky: ", rovnobezky_B)
 
 vzorec_braunovo()
-
 """
+
+
 def vzorec_mercatorovo():
     rovnobezky_M = []
     deg_r_poz = 0
@@ -155,11 +168,11 @@ def vzorec_mercatorovo():
             rovnobezky_M_neg = [_ / -1 for _ in rovnobezky_M_rev]
     print("Rovnoběžky: ", rovnobezky_M_rev, 0, rovnobezky_M, ", -")
 
-
 vzorec_mercatorovo()
-"""
+
 
 # asi vyhozena cast z Mercatora
+
 """
 rovnobezky_M_rev = list(reversed(rovnobezky_M))
         rovnobezky_M_neg = [_ / -1 for _ in rovnobezky_M_rev]
