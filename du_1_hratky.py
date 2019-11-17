@@ -1,3 +1,6 @@
+# from __future__ import print_function
+import math
+
 # \n\
 
 # L --> Lambertovo zobrazení
@@ -20,7 +23,7 @@
 # x je poloha na rovniku a urcuje, kde mam kolmo na to nakreslit POLEDNIK
 # y je poloha na nultym poledniku a urcuje, kde mam kolmo na to nakreslit ROVNOBEZKU (tech je min a ty se meni)
 
-import math
+
 R = 6371.11
 """
 v = 10
@@ -150,35 +153,43 @@ def vzorec_braunovo():
     print("Rovnoběžky: ", rovnobezky_B)
 
 vzorec_braunovo()
-"""
+
 
 
 def vzorec_mercatorovo():
-    rovnobezky_M = []
+    rovnobezky_M_poz = []
     deg_r_poz = 0
     for _ in range(8):
         deg_r_poz = (deg_r_poz + 10)
-        rovnobezka = round(((R*(math.log(1/math.tan(math.radians((90-deg_r_poz)/2)))))/x), ndigits=1)
-        if abs(rovnobezka) > 100:
-            rovnobezka = "-"
-        rovnobezky_M.append(rovnobezka)
+        rovnobezka_poz = round(((R*(math.log(1/math.tan(math.radians((90-deg_r_poz)/2)))))/x), ndigits=1)
+        if abs(rovnobezka_poz) > 100:
+            rovnobezka_poz = "-"
+        rovnobezky_M_poz.append(rovnobezka_poz)
 
-        rovnobezky_M_rev = list(reversed(rovnobezky_M))
-        if
-            rovnobezky_M_neg = [_ / -1 for _ in rovnobezky_M_rev]
-    print("Rovnoběžky: ", rovnobezky_M_rev, 0, rovnobezky_M, ", -")
+    rovnobezky_M_neg = []
+    deg_r_neg = 0
+    for i in range(8):
+        deg_r_neg = (deg_r_neg - 10)
+        rovnobezka_neg = round(((R * (math.log(1 / math.tan(math.radians((90 - deg_r_neg) / 2))))) / x), ndigits=1)
+        if abs(rovnobezka_neg) > 100:
+            rovnobezka_neg = "-"
+        rovnobezky_M_neg.append(rovnobezka_neg)
+    rovnobezky_M_neg_rev = list(reversed(rovnobezky_M_neg))
 
+    print(rovnobezky_M_neg_rev, "," ,0, ",", rovnobezky_M_poz)
+    
 vzorec_mercatorovo()
-
-
-# asi vyhozena cast z Mercatora
-
+from __future__ import print_function
 """
-rovnobezky_M_rev = list(reversed(rovnobezky_M))
-        rovnobezky_M_neg = [_ / -1 for _ in rovnobezky_M_rev]
 
+""" 
+        rovnobezky_M_rev = list(reversed(rovnobezky_M))
         Srovnobezky = [str(_) for _ in rovnobezky_M]
-        Srovnobezky_neg = [str(_) for _ in rovnobezky_M_neg]
-
-    print("-,", (", ".join(Srovnobezky_neg)), 0,  (", ".join(Srovnobezky)), ", -")
+        Srovnobezky_rev = [str(_) for _ in rovnobezky_M_rev]
+        #if type(float) in rovnobezky_M_rev == True:
+         #   rovnobezky_M_neg = [_ / -1 for _ in rovnobezky_M_rev]
+    print("Rovnoběžky: ", (",-".join(Srovnobezky_rev)), 0, (", ".join(Srovnobezky)))
 """
+list = [1, 2, 4, 7]
+
+print(*list, sep="X")

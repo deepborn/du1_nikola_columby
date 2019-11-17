@@ -7,9 +7,6 @@
 import math
 R = 6371.11
 
-# DEFINUJU FUNKCE, ALE AZ POTOM URCUJU MERITKO?????
-
-
 # definovani funkci pro vypocet zobrazeni
 def vzorec_lambertovo():
     rovnobezky_L=[]
@@ -44,6 +41,29 @@ def vzorec_braunovo():
         rovnobezky_B.append(rovnobezka)
     print("Rovnoběžky: ", rovnobezky_B)
 
+
+def vzorec_mercatorovo():
+    rovnobezky_M_poz = []
+    deg_r_poz = 0
+    for _ in range(8):
+        deg_r_poz = (deg_r_poz + 10)
+        rovnobezka_poz = round(((R * (math.log(1 / math.tan(math.radians((90 - deg_r_poz) / 2))))) / x), ndigits=1)
+        if abs(rovnobezka_poz) > 100:
+            rovnobezka_poz = "-"
+        rovnobezky_M_poz.append(rovnobezka_poz)
+
+    rovnobezky_M_neg = []
+    deg_r_neg = 0
+    for i in range(8):
+        deg_r_neg = (deg_r_neg - 10)
+        rovnobezka_neg = round(((R * (math.log(1 / math.tan(math.radians((90 - deg_r_neg) / 2))))) / x), ndigits=1)
+        if abs(rovnobezka_neg) > 100:
+            rovnobezka_neg = "-"
+        rovnobezky_M_neg.append(rovnobezka_neg)
+    rovnobezky_M_neg_rev = list(reversed(rovnobezky_M_neg))
+
+    print(rovnobezky_M_neg_rev, ",", 0, ",", rovnobezky_M_poz)
+
 # vyber zobrazeni uzivatelem
 
 zobrazeni_input = input("Nejdřív si vyber zobrazení! Pro Lambertovo napiš L, pro Marinovo napiš A,\
@@ -70,9 +90,12 @@ while True:
         def vzorec_pouzivany():
             vzorec_braunovo()
         break
-    #if zobrazeni == "M": # mercatorovo zobrazeni
-     #   print("Vybral sis Mercatorovo válcové tečné zobrazení")
-      #  break
+    if zobrazeni == "M": # mercatorovo zobrazeni
+        print("Vybral sis Mercatorovo válcové tečné zobrazení")
+
+        def vzorec_pouzivany():
+            vzorec_mercatorovo()
+        break
     else:
         print("Zadal jsi neplatný input, nelze vybrat zadání :(")
         exit()
