@@ -63,7 +63,7 @@ def vzorec_mercatorovo():
     rovnobezky_M_neg_rev = list(reversed(rovnobezky_M_neg))
 
     print(rovnobezky_M_neg_rev, ",", 0, ",", rovnobezky_M_poz)
-
+# muzu pomoci plus secist seznamy  a z nuly si musim udelat taky seznam
 # vyber zobrazeni uzivatelem
 
 zobrazeni_input = input("Nejdřív si vyber zobrazení! Pro Lambertovo napiš L, pro Marinovo napiš A,\
@@ -72,51 +72,50 @@ zobrazeni = str(zobrazeni_input.upper())
 
 while True:
     if zobrazeni == "L":
-        print("Vybral sis Lambertovo válcové tečné zobrazení")
+        print("Vybral/a sis Lambertovo válcové tečné zobrazení")
 
         def vzorec_pouzivany():
             vzorec_lambertovo()
         break
 
     if zobrazeni == "A":
-        print("Vybral sis Marinovo válcové tečné zobrazení")
+        print("Vybral/a sis Marinovo válcové tečné zobrazení")
 
         def vzorec_pouzivany():
             vzorec_marinovo()
         break
     if zobrazeni == "B":
-        print("Vybral sis Braunovo válcové tečné zobrazení")
+        print("Vybral/a sis Braunovo válcové tečné zobrazení")
 
         def vzorec_pouzivany():
             vzorec_braunovo()
         break
     if zobrazeni == "M": # mercatorovo zobrazeni
-        print("Vybral sis Mercatorovo válcové tečné zobrazení")
+        print("Vybral/a sis Mercatorovo válcové tečné zobrazení")
 
         def vzorec_pouzivany():
             vzorec_mercatorovo()
         break
     else:
-        print("Zadal jsi neplatný input, nelze vybrat zadání :(")
+        print("Zadal/a jsi neplatný input, nelze vybrat zadání :(")
         exit()
 
 
 # uzivatel zada meritko a z se nej vypocita cislo, kterym se vysledek vzorecku prevadi do cm
-
 meritko = input("Zadej měřítko ve formě 1 : x. Napiš pouze x, celočíselně a bez mezer mezi nulami: ")
 try:
     val = int(meritko)
-    print("Zadal jsi správně měřítko, zvolené měřítko je 1 :", meritko)
+    print("Zadal/a jsi správně měřítko, zvolené měřítko je 1 :", meritko)
 except ValueError:
-    print("Zadal jsi špatně měřítko, zkus to znovu! Napsal jsi: ", meritko)
+    print("Zadal/a jsi špatně měřítko! Napsal jsi: ", meritko)
 
 x = int(meritko) / 100000 # udela z meritko cislo, ktere se pouzije ve vzorci
 
-# pocitadlo poledniku - vsechny zobrazeni STEJNY
 
+# pocitadlo poledniku
 poledniky = [] #seznam polednkiku
-deg_p = -190
 
+deg_p = -190
 for i in range(37):
     deg_p = (deg_p + 10)
     polednik = round(((R*(math.radians(deg_p))/x)), ndigits=1)
@@ -124,9 +123,6 @@ for i in range(37):
         polednik = "-"
     poledniky.append(polednik)
 
-
+# vysledne zobrazeni rovnobezek
 vzorec_pouzivany()
 print("Poledníky: ", poledniky)
-
-
-
