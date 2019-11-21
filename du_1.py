@@ -5,13 +5,13 @@
 # meritko si vybere, to se jen ulozi do promenny a pak se tim proste vydeli ten vysledek
 
 import math
-R = 6371.11
+#R = 6371.11
 
 # definovani funkci pro vypocet zobrazeni
 def vzorec_poledniky():
     poledniky = []
     for deg_p in range(-180, 190, 10):
-        polednik = round(((6371.11*(math.radians(deg_p))/x)), ndigits=1)
+        polednik = round(((R*(math.radians(deg_p))/x)), ndigits=1)
         if abs(polednik) > 100:
             polednik = "-"
         poledniky.append(polednik)
@@ -48,14 +48,14 @@ def vzorec_braunovo():
 def vzorec_mercatorovo():
     rovnobezky_M_poz = []
     for deg_r_poz in range(10, 90, 10):
-        rovnobezka_poz = round(((R * (math.log(1 / math.tan(math.radians((90 - deg_r_poz) / 2))))) / x), ndigits=1)
+        rovnobezka_poz = round(((R*(math.log(1/math.tan(math.radians((90-deg_r_poz)/2)))))/x), ndigits=1)
         if abs(rovnobezka_poz) > 100:
             rovnobezka_poz = "-"
         rovnobezky_M_poz.append(rovnobezka_poz)
 
     rovnobezky_M_neg = []
     for deg_r_neg in range(-80, 0, 10):
-        rovnobezka_neg = round(((R * (math.log(1 / math.tan(math.radians((90 - deg_r_neg) / 2))))) / x), ndigits=1)
+        rovnobezka_neg = round(((R*(math.log(1/math.tan(math.radians((90-deg_r_neg)/2)))))/x), ndigits=1)
         if abs(rovnobezka_neg) > 100:
             rovnobezka_neg = "-"
         rovnobezky_M_neg.append(rovnobezka_neg)
@@ -105,6 +105,18 @@ except ValueError:
 
 x = abs(val / 100000) # udela z meritko cislo, ktere se pouzije ve vzorci
 
+# vyber polomeru zeme
+polomer = input("Zadej v km poloměr Země, se kterým chceš počítat. Zadáš-li '0', bude použit výchozí poloměr 6371.11 km \n"
+"Budeš-li zadávat desetinnou čárku, napiš ji prosím jako tečku: ")
+
+while True:
+    if polomer == "0":
+        R = 6371.11
+        print("Vybraný poloměr: ", (R), "km")
+    else:
+        R = float(polomer)
+        print("Vybraný poloměr: ", (R), "km")
+    break
 
 # vysledne zobrazeni rovnobezek a poledniku
 vzorec_rovnobezky()
