@@ -2,7 +2,8 @@ import math
 
 """definování funkcí pro výpočet zobrazení
    vypočítávají po deseti rozsah stupňů, které postupně vkládají do vzorce a výsledek ukládají do seznamu, který na konci tisknou
-   dva vstupní parametry jsou měřítko a poloměr, které jsou uživatelem vybrané/zadané na konci programu dosazené do funkce
+   dva vstupní parametry jsou měřítko a poloměr, které jsou uživatelem vybrané/zadané a na konci programu dosazené do funkce
+   výstupem všech funkcí je seznam obsahující rovnoběžky/poledníky
 """
 def vzorec_poledniky(meritko_P, polomer_P):
     poledniky = []
@@ -98,11 +99,11 @@ meritko = input("Zadej měřítko ve formě 1 : x. Napiš pouze x, celočíseln�
 try:
     val = int(meritko)
     if val < 1:
-        print("Zadal/a jsi '0' nebo číslo menší než '0', to bohužel měřítko nemůže být...zkus to celé znovu")
+        print("Zadal/a jsi '0' nebo číslo menší než '0', to bohužel měřítko být nemůže...zkus to celé znovu.")
         exit()
     print("Zadal/a jsi číslo:", meritko, ", bude použito měčítko 1 :", val)
 except ValueError:
-    print("Zadal/a jsi špatně měřítko! Napsal jsi: ", meritko)
+    print("Zadal/a jsi špatně měřítko! Napsal jsi: ", meritko, "zkus to znovu.")
 
 x = abs(val / 100000) # dělení 100000 zajišťuje, že číslo "vyplivnuté" funkcí bude v cm
 
@@ -114,10 +115,10 @@ polomer = input("Zadej v km poloměr Země, se kterým chceš počítat. Zadáš
 try:
     hod = float(polomer)
     if hod < 0:
-        print("Zadal/a jsi číslo menší než '0', to bohužel poloměr nemůže být...zkus to celé znovu.")
+        print("Zadal/a jsi číslo menší než '0', to bohužel poloměr být nemůže...zkus to celé znovu.")
         exit()
 except ValueError:
-    print("Zadal/a jsi špatně poloměr! Napsal jsi: ", polomer)
+    print("Zadal/a jsi špatně poloměr! Napsal jsi: ", polomer, "zkus to znovu.")
 
 while True:
     if polomer == "0":
