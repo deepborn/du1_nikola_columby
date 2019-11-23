@@ -1,13 +1,8 @@
-# bude neco, co dovoli vybrat si zobrazeni a meritko
-# az si vybere zobrazeni, tak se podle toho zaktivojou ty spravny vzorce
-# pro "x" bude dycky stejnej, pro "y" se dovybere
-# ulozit si to do seznamu s urcitym poradim, bod 0,0 nejak dat doprostred?
-# meritko si vybere, to se jen ulozi do promenny a pak se tim proste vydeli ten vysledek
-
 import math
-#R = 6371.11
 
-# definovani funkci pro vypocet zobrazeni
+"""definování funkcí pro výpočet zobrazení
+   vypočítávají si rozsah stupňů, které postupně vkládají do vzorce a výsledek ukládají do seznamu, který na konci tisknou
+"""
 def vzorec_poledniky():
     poledniky = []
     for deg_p in range(-180, 190, 10):
@@ -61,12 +56,13 @@ def vzorec_mercatorovo():
         rovnobezky_M_neg.append(rovnobezka_neg)
 
     nula = [0]
-    print("Rovnoběžky: ", (rovnobezky_M_neg + nula + rovnobezky_M_poz))
-# muzu pomoci plus secist seznamy  a z nuly si musim udelat taky seznam
-# vyber zobrazeni uzivatelem
+    pomlcka = ["-"]
+    print("Rovnoběžky: ", (pomlcka + rovnobezky_M_neg + nula + rovnobezky_M_poz + pomlcka))
+
+# výběr zobrazení uživatelem, lze použít malé i velké písmeno
 
 zobrazeni_input = input("Nejdřív si vyber zobrazení! Pro Lambertovo napiš L, pro Marinovo napiš A,\
- pro Braunovo napiš B, pro Mercatorovo napiš M :" )
+pro Braunovo napiš B, pro Mercatorovo napiš M :" )
 zobrazeni = str(zobrazeni_input.upper())
 
 while True:
@@ -95,17 +91,18 @@ while True:
         exit()
 
 
-# uzivatel zada meritko a z se nej vypocita cislo, kterym se vysledek vzorecku prevadi do cm
+# zadání měřítka uživatelem, jeho input se zhodnotí, zda se skutečně jedná o číslo a pouze poté jej lze použít
+
 meritko = input("Zadej měřítko ve formě 1 : x. Napiš pouze x, celočíselně a bez mezer mezi nulami: ")
 try:
-    val = abs(int(meritko))
+    val = int(meritko)
     print("Zadal/a jsi číslo:", meritko, ", bude použito měčítko 1 :", abs(val))
 except ValueError:
     print("Zadal/a jsi špatně měřítko! Napsal jsi: ", meritko)
 
-x = abs(val / 100000) # udela z meritko cislo, ktere se pouzije ve vzorci
+x = abs(val / 100000) # dělení 100000 zajišťuje, že číslo "vyplivnuté" funkcí bude v cm
 
-# vyber polomeru zeme
+# výběr poloměru Země uživatelem, zadá-
 polomer = input("Zadej v km poloměr Země, se kterým chceš počítat. Zadáš-li '0', bude použit výchozí poloměr 6371.11 km \n"
 "Budeš-li zadávat desetinnou čárku, napiš ji prosím jako tečku: ")
 
@@ -118,6 +115,6 @@ while True:
         print("Vybraný poloměr: ", (R), "km")
     break
 
-# vysledne zobrazeni rovnobezek a poledniku
+# použítí funkcí, pro vypočítání a vypsání rovnoběžek a poledníků
 vzorec_rovnobezky()
 vzorec_poledniky()

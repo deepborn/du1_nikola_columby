@@ -153,7 +153,7 @@ def vzorec_braunovo():
     print("Rovnoběžky: ", rovnobezky_B)
 
 vzorec_braunovo()
-
+"""
 
 def vzorec_poledniky():
     poledniky = []
@@ -162,33 +162,28 @@ def vzorec_poledniky():
         if abs(polednik) > 100:
             polednik = "-"
         poledniky.append(polednik)
-    print("Poledníky: ", poledniky)
+    return poledniky
+
 
 vzorec_poledniky()
 
 def vzorec_mercatorovo():
     rovnobezky_M_poz = []
     for deg_r_poz in range(10, 90, 10):
-        rovnobezka_poz = round(((R * (math.log(1 / math.tan(math.radians((90 - deg_r_poz) / 2))))) / x), ndigits=1)
+        rovnobezka_poz = round(((R*(math.log(1/math.tan(math.radians((90-deg_r_poz)/2)))))/x), ndigits=1)
         if abs(rovnobezka_poz) > 100:
             rovnobezka_poz = "-"
         rovnobezky_M_poz.append(rovnobezka_poz)
 
     rovnobezky_M_neg = []
     for deg_r_neg in range(-80, 0, 10):
-        rovnobezka_neg = round(((R * (math.log(1 / math.tan(math.radians((90 - deg_r_neg) / 2))))) / x), ndigits=1)
+        rovnobezka_neg = round(((R*(math.log(1/math.tan(math.radians((90-deg_r_neg)/2)))))/x), ndigits=1)
         if abs(rovnobezka_neg) > 100:
             rovnobezka_neg = "-"
         rovnobezky_M_neg.append(rovnobezka_neg)
 
     nula = [0]
-    print(rovnobezky_M_neg + nula + rovnobezky_M_poz)
+    pomlcka = ["-"]
+    print("Rovnoběžky: ", (pomlcka + rovnobezky_M_neg + nula + rovnobezky_M_poz + pomlcka))
 
 vzorec_mercatorovo()
-"""
-def mrdecka():
-    print("no tvl")
-
-sracicka = mrdecka
-
-sracicka()
