@@ -155,29 +155,29 @@ def vzorec_braunovo():
 vzorec_braunovo()
 """
 
-def vzorec_poledniky():
+def vzorec_poledniky(polomer_P):
     poledniky = []
     for deg_p in range(-180, 190, 10):
-        polednik = round(((6371.11*(math.radians(deg_p))/x)), ndigits=1)
+        polednik = round(((polomer_P*(math.radians(deg_p))/x)), ndigits=1)
         if abs(polednik) > 100:
             polednik = "-"
         poledniky.append(polednik)
-    return poledniky
+    print("Poledníky: ", poledniky)
 
 
-vzorec_poledniky()
+vzorec_poledniky(x)
 
-def vzorec_mercatorovo():
+def vzorec_mercatorovo(polomer_R):
     rovnobezky_M_poz = []
     for deg_r_poz in range(10, 90, 10):
-        rovnobezka_poz = round(((R*(math.log(1/math.tan(math.radians((90-deg_r_poz)/2)))))/x), ndigits=1)
+        rovnobezka_poz = round(((polomer_R*(math.log(1/math.tan(math.radians((90-deg_r_poz)/2)))))/x), ndigits=1)
         if abs(rovnobezka_poz) > 100:
             rovnobezka_poz = "-"
         rovnobezky_M_poz.append(rovnobezka_poz)
 
     rovnobezky_M_neg = []
     for deg_r_neg in range(-80, 0, 10):
-        rovnobezka_neg = round(((R*(math.log(1/math.tan(math.radians((90-deg_r_neg)/2)))))/x), ndigits=1)
+        rovnobezka_neg = round(((polomer_R*(math.log(1/math.tan(math.radians((90-deg_r_neg)/2)))))/x), ndigits=1)
         if abs(rovnobezka_neg) > 100:
             rovnobezka_neg = "-"
         rovnobezky_M_neg.append(rovnobezka_neg)
@@ -186,4 +186,4 @@ def vzorec_mercatorovo():
     pomlcka = ["-"]
     print("Rovnoběžky: ", (pomlcka + rovnobezky_M_neg + nula + rovnobezky_M_poz + pomlcka))
 
-vzorec_mercatorovo()
+vzorec_mercatorovo(x)
